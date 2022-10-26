@@ -7,11 +7,11 @@ import javax.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import modelo.Usuario;
+import modelo.Alumno;
 import utils.HibernateUtil;
 
-public class UsuarioDAO {
-	public void insertarUsuarioHibernate(Usuario a) {
+public class AlumnoDAO{
+	public void insertarAlumnoHibernate(Alumno a) {
 		Transaction tr = null;
 		Session sesion = null;
 
@@ -30,7 +30,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void modificarUsuarioHibernate(Usuario a) {
+	public void modificarAlumnoHibernate(Alumno a) {
 		Transaction tr = null;
 		Session sesion = null;
 		
@@ -49,7 +49,7 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void deleteUsuarioHibernate(Usuario a) {
+	public void deleteAlumnoHibernate(Alumno a) {
 		Transaction tr = null;
 		Session sesion = null;
 		
@@ -68,8 +68,8 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public ArrayList<Usuario> listarUsuariosHibernate() {
-		ArrayList<Usuario> resultado = null;
+	public ArrayList<Alumno> listarAlumnosHibernate() {
+		ArrayList<Alumno> resultado = null;
 		
 		Transaction tr = null;
 		Session sesion = null;
@@ -78,7 +78,7 @@ public class UsuarioDAO {
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			resultado = (ArrayList<Usuario> ) sesion.createQuery("from Usuario").getResultList();
+			resultado = (ArrayList<Alumno> ) sesion.createQuery("from Alumno").getResultList();
 			tr.commit();
 			
 			return resultado;
@@ -93,7 +93,7 @@ public class UsuarioDAO {
 		return null;
 	}
 	
-	public Usuario buscarPorIdHibernate(int i) {
+	public Alumno buscarPorIdHibernate(int i) {
 		
 		Transaction tr = null;
 		Session sesion = null;
@@ -102,10 +102,10 @@ public class UsuarioDAO {
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			Usuario miUsuario = (Usuario) sesion.find(Usuario.class, i);
-			System.out.println("El usuario buscado se llama " + miUsuario.getNombre());
+			Alumno miAlumno = (Alumno) sesion.find(Alumno.class, i);
+			System.out.println("El alumno buscado se llama " + miAlumno.getNombre());
 			tr.commit();
-			return miUsuario;
+			return miAlumno;
 
 		} catch (PersistenceException e) {
 			tr.rollback();

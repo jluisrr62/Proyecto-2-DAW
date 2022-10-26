@@ -11,7 +11,9 @@
         </description>
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+		<class>modelo.Admin</class>
 		<class>modelo.Alumno</class>
+		<class>modelo.Usuario</class>
 
         <properties>
              
