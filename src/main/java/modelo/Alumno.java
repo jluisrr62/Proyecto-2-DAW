@@ -11,10 +11,10 @@ public class Alumno extends Usuario{
 	@Column(name="curso")
 	private String curso;
 	
-	public Alumno(String n, String c) {
-		super(n);
+	public Alumno(String dni, String nombre, String curso) {
+		super(dni, nombre);
 		// TODO Auto-generated constructor stub
-		this.curso = c;
+		this.curso = curso;
 	}
 
 }

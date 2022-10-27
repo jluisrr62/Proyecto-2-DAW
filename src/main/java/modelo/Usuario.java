@@ -9,14 +9,15 @@ import javax.persistence.Table;
 @MappedSuperclass
 public class Usuario {
 	@Id
-	@Column(name="dni")
+	@Column(name="dni", length=64)
 	private String dni;
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name="contrasenia")
 	private String contrasenia;
 
-	public Usuario(String n) {
+	public Usuario(String dni, String n) {
+		this.dni = dni;
 		this.nombre = n;
 	}
 
