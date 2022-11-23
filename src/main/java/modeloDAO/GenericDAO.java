@@ -7,11 +7,18 @@ import javax.persistence.PersistenceException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import modelo.Usuario;
 import utils.HibernateUtil;
 
-public class UsuarioDAO{
-	public void insertarUsuarioHibernate(Usuario a) {
+public class GenericDAO<T>{
+private Class<T> claseDelRegistro;
+	
+	public GenericDAO(Class<T> miClase) {
+		claseDelRegistro = miClase;
+	}
+	
+	
+	//Hibernate
+	public void insertarRegistroHibernate(T b) {
 		Transaction tr = null;
 		Session sesion = null;
 
@@ -19,7 +26,7 @@ public class UsuarioDAO{
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			sesion.persist(a);
+			sesion.persist(b);
 			tr.commit();
 
 		} catch (PersistenceException e) {
@@ -30,7 +37,7 @@ public class UsuarioDAO{
 		}
 	}
 	
-	public void modificarUsuarioHibernate(Usuario a) {
+	public void modificarRegsitroHibernate(T b) {
 		Transaction tr = null;
 		Session sesion = null;
 		
@@ -38,7 +45,7 @@ public class UsuarioDAO{
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			sesion.merge(a);
+			sesion.merge(b);
 			tr.commit();
 
 		} catch (PersistenceException e) {
@@ -49,7 +56,7 @@ public class UsuarioDAO{
 		}
 	}
 	
-	public void deleteUsuarioHibernate(Usuario a) {
+	public void deleteRegistroHibernate(T b) {
 		Transaction tr = null;
 		Session sesion = null;
 		
@@ -57,7 +64,7 @@ public class UsuarioDAO{
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			sesion.remove(a);
+			sesion.remove(b);
 			tr.commit();
 
 		} catch (PersistenceException e) {
@@ -68,8 +75,8 @@ public class UsuarioDAO{
 		}
 	}
 	
-	public ArrayList<Usuario> listarUsuariosHibernate() {
-		ArrayList<Usuario> resultado = null;
+	public ArrayList<T> listarRegistrosHibernate(String clase) {
+		ArrayList<T> resultado = null;
 		
 		Transaction tr = null;
 		Session sesion = null;
@@ -78,7 +85,7 @@ public class UsuarioDAO{
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			resultado = (ArrayList<Usuario> ) sesion.createQuery("from Usuario").getResultList();
+			resultado = (ArrayList<T> ) sesion.createQuery("from "+clase).getResultList();
 			tr.commit();
 			
 			return resultado;
@@ -93,7 +100,7 @@ public class UsuarioDAO{
 		return null;
 	}
 	
-	public Usuario buscarPorIdHibernate(int i) {
+	public T buscarPorIdHibernate(int i) {
 		
 		Transaction tr = null;
 		Session sesion = null;
@@ -102,10 +109,10 @@ public class UsuarioDAO{
 
 			sesion = HibernateUtil.getSessionFactory().openSession();
 			tr = sesion.beginTransaction();
-			Usuario miUsuario = (Usuario) sesion.find(Usuario.class, i);
-			System.out.println("El Usuario buscado se llama " + miUsuario.getNombre());
+			T miRegistro = sesion.find(claseDelRegistro, i);
+			System.out.println("El registro buscado se llama " + miRegistro);
 			tr.commit();
-			return miUsuario;
+			return miRegistro;
 
 		} catch (PersistenceException e) {
 			tr.rollback();
@@ -116,4 +123,5 @@ public class UsuarioDAO{
 		
 		return null;
 	}
+	
 }
