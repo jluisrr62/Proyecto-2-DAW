@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -15,7 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Recogidas")
+@Table(name = "recogidas")
 public class Recogida {
 	
 	@Id
@@ -37,7 +39,7 @@ public class Recogida {
 	Date fecha;
 	
 	@Basic
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIME)
 	@Column(name="hora")
 	Date hora;
 	
@@ -86,6 +88,24 @@ public class Recogida {
 		this.hora = hora;
 	}
 	
+	
+	 public Date parseFecha(String date) {
+	     try {
+	         return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+	     } catch (ParseException e) {
+	    	 System.out.println("fecha incorrecta");
+	         return null;
+	     }
+	  }
+	
+	 public Date parseHora(String date) {
+	     try {
+	         return new SimpleDateFormat("HH:mm").parse(date);
+	     } catch (ParseException e) {
+	    	 System.out.println("hora incorrecta");
+	         return null;
+	     }
+	  }
 	
 	
 }
