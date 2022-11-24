@@ -12,5 +12,7 @@
         <mapping class="modelo.Alumno"/>
         <mapping class="modelo.Admin"/>
         <mapping class="modelo.Usuario"/>
+        <mapping class="modelo.Recogida"/>
+        <mapping class="modelo.Libro"/>
     </session-factory>
 </hibernate-configuration>

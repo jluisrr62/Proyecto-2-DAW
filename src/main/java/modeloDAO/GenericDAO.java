@@ -1,6 +1,7 @@
 package modeloDAO;
 
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 import javax.persistence.PersistenceException;
 
@@ -24,7 +25,7 @@ private Class<T> claseDelRegistro;
 
 		try {
 
-			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion = HibernateUtil.getSessionFactory().withOptions().jdbcTimeZone(TimeZone.getTimeZone("GMT+1")).openSession();
 			tr = sesion.beginTransaction();
 			sesion.persist(b);
 			tr.commit();
@@ -43,7 +44,7 @@ private Class<T> claseDelRegistro;
 		
 		try {
 
-			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion = HibernateUtil.getSessionFactory().withOptions().jdbcTimeZone(TimeZone.getTimeZone("GMT+1")).openSession();
 			tr = sesion.beginTransaction();
 			sesion.merge(b);
 			tr.commit();
@@ -62,7 +63,7 @@ private Class<T> claseDelRegistro;
 		
 		try {
 
-			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion = HibernateUtil.getSessionFactory().withOptions().jdbcTimeZone(TimeZone.getTimeZone("GMT+1")).openSession();
 			tr = sesion.beginTransaction();
 			sesion.remove(b);
 			tr.commit();
@@ -83,7 +84,7 @@ private Class<T> claseDelRegistro;
 		
 		try {
 
-			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion = HibernateUtil.getSessionFactory().withOptions().jdbcTimeZone(TimeZone.getTimeZone("GMT+1")).openSession();
 			tr = sesion.beginTransaction();
 			resultado = (ArrayList<T> ) sesion.createQuery("from "+clase).getResultList();
 			tr.commit();
@@ -107,7 +108,7 @@ private Class<T> claseDelRegistro;
 		
 		try {
 
-			sesion = HibernateUtil.getSessionFactory().openSession();
+			sesion = HibernateUtil.getSessionFactory().withOptions().jdbcTimeZone(TimeZone.getTimeZone("GMT+1")).openSession();
 			tr = sesion.beginTransaction();
 			T miRegistro = sesion.find(claseDelRegistro, i);
 			System.out.println("El registro buscado se llama " + miRegistro);
