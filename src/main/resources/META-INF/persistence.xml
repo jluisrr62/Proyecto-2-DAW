@@ -16,6 +16,7 @@
 		<class>modelo.Usuario</class>
 		<class>modelo.Libro</class>
 		<class>modelo.Recogida</class>
+		<class>modelo.Asignatura</class>
 
         <properties>
              

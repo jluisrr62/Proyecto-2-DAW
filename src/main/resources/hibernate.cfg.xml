@@ -14,5 +14,6 @@
         <mapping class="modelo.Usuario"/>
         <mapping class="modelo.Recogida"/>
         <mapping class="modelo.Libro"/>
+        <mapping class="modelo.Asignatura"/>
     </session-factory>
 </hibernate-configuration>
